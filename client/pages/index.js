@@ -10,14 +10,18 @@ export default function Home() {
   const [categories, setCategories] = useState([]);
 
   const newFetch = () => {
-    fetch('http://127.0.0.1:5000/hello')
-      .then(function(response) {
-        if (!response.ok) throw new Error(`Error: ${response.status}`);
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log('Looks like there was a problem: ', error);
-      });
+    fetch('http://127.0.0.1:8000/budget/2b1a388e-bdeb-4baf-866b-4999b93600e2')
+      .then(response => response.json())
+      .then(data => console.log(data))
+
+    // fetch('http://127.0.0.1:8000/budget/2b1a388e-bdeb-4baf-866b-4999b93600e2')
+    //   .then(function(response) {
+    //     if (!response.ok) throw new Error(`Error: ${response.status}`);
+    //     console.log(response);
+    //   })
+    //   .catch(function(error) {
+    //     console.log('Looks like there was a problem: ', error);
+    //   });
   }
 
   const addCategory = () => {

@@ -12,11 +12,13 @@ from datetime import date
 
 def budget_single(id: uuid, db: Session):
     ## pseudo-SQL: select 1 budget where id == {id}
-    # budget = db.query().filter(Budget.id == id)
+    
     budget = db.query(
         Budget.id,
         Budget.date_created,
         Budget.name
+    ).filter(
+        Budget.id == id
     ).first()
 
     # budget = { 
