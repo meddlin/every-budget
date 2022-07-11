@@ -4,9 +4,9 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.database.models import Budget
-# from app.database.models import Category
-# from app.database.models import Envelope
-# from app.database.models import Transaction
+from app.database.models import Category
+from app.database.models import Envelope
+from app.database.models import Transaction
 
 from datetime import date
 
@@ -31,23 +31,41 @@ def budget_single(id: uuid, db: Session):
         return False
     return budget
 
-# def category_single(id: id, db: Session):
-#     ## pseudo-SQL: select 1 budget where id == {id}
-#     category = db.query().filter(Category.id == id)
-#     if not category:
-#         return False
-#     return category
+def category_single(id: uuid, db: Session):
+    ## pseudo-SQL: select 1 budget where id == {id}
+    category = db.query(
+        Category.id,
+        Category.date_created,
+        Category.name,
+        Category.budget_id
+    ).filter(
+        Category.id == id
+    ).first()
+    if not category:
+        return False
+    return category
 
-# def envelope_single(id: id, db: Session):
-#     ## pseudo-SQL: select 1 budget where id == {id}
-#     envelope = db.query().filter(Envelope.id == id)
-#     if not envelope:
-#         return False
-#     return envelope
+def category_insert_single(db: Session):
+    # print('passed in..')
+    # print(category)
 
-# def transaction_single(id: id, db: Session):
-#     ## pseudo-SQL: select 1 budget where id == {id}
-#     transaction = db.query().filter(Transaction.id == id)
-#     if not transaction:
-#         return False
-#     return transaction
+    print('reached category_insert_single')
+
+    hardcode_category = Category(id = uuid.uuid4(), date_created = datetime.datetime.now(), name = 'Jan', budget_id = uuid.uuid4())
+    db.add(hardcode_category)
+    db.commit()
+
+
+def envelope_single(id: uuid, db: Session):
+    ## pseudo-SQL: select 1 budget where id == {id}
+    envelope = db.query().filter(Envelope.id == id)
+    if not envelope:
+        return False
+    return envelope
+
+def transaction_single(id: uuid, db: Session):
+    ## pseudo-SQL: select 1 budget where id == {id}
+    transaction = db.query().filter(Transaction.id == id)
+    if not transaction:
+        return False
+    return transaction

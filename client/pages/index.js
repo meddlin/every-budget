@@ -13,6 +13,9 @@ export default function Home() {
     fetch('http://127.0.0.1:8000/budget/2b1a388e-bdeb-4baf-866b-4999b93600e2')
       .then(response => response.json())
       .then(data => console.log(data))
+      .catch(error => {
+        console.log('Looks like there was a problem: ', error);
+      })
 
     // fetch('http://127.0.0.1:8000/budget/2b1a388e-bdeb-4baf-866b-4999b93600e2')
     //   .then(function(response) {
@@ -22,6 +25,23 @@ export default function Home() {
     //   .catch(function(error) {
     //     console.log('Looks like there was a problem: ', error);
     //   });
+  }
+
+  const fetchPostData = {
+    id: 1,
+    name: 'asdf'
+  }
+  const fetchPost = () => {
+    fetch('http://localhost:8000/category/create', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(fetchPostData)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
   }
 
   const addCategory = () => {
@@ -49,6 +69,10 @@ export default function Home() {
           <button className="border-2 border-rose-500"
             onClick={newFetch}>
             Test Fetch
+          </button>
+          <button className="border-2 border-rose-500"
+            onClick={fetchPost}>
+            Test - POST
           </button>
         </div>
         
