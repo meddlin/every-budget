@@ -10,7 +10,7 @@ class Budget(Base):
     __table__ = Table(
         "budget", 
         metadata, 
-        sqlalchemy.Column("id", UUID, primary_key=True, default=uuid.uuid4),
+        sqlalchemy.Column("id", UUID(as_uuid=True), primary_key=True, default=uuid.uuid4),
         sqlalchemy.Column("date_created", sqlalchemy.DateTime),
         sqlalchemy.Column("name", sqlalchemy.String)
     )
@@ -29,23 +29,23 @@ class Envelope(Base):
     __table__ = Table(
         "envelope",
         metadata, 
-        sqlalchemy.Column("id", UUID, primary_key=True, default=uuid.uuid4),
+        sqlalchemy.Column("id", UUID(as_uuid=True), primary_key=True, default=uuid.uuid4),
         sqlalchemy.Column("date_created", sqlalchemy.DateTime),
         sqlalchemy.Column("name", sqlalchemy.String),
         sqlalchemy.Column("spent", sqlalchemy.Numeric),
         sqlalchemy.Column("budget", sqlalchemy.Numeric),
-        sqlalchemy.Column("category_id", UUID)
+        sqlalchemy.Column("category_id", UUID(as_uuid=True))
     )
 
 class Transaction(Base):
     __table__ = Table(
         "transaction",
         metadata, 
-        sqlalchemy.Column("id", UUID, primary_key=True, default=uuid.uuid4),
+        sqlalchemy.Column("id", UUID(as_uuid=True), primary_key=True, default=uuid.uuid4),
         sqlalchemy.Column("date_created", sqlalchemy.DateTime),
         sqlalchemy.Column("date_added", sqlalchemy.DateTime),
         sqlalchemy.Column("vendor", sqlalchemy.String),
         sqlalchemy.Column("amount", sqlalchemy.Numeric),
         sqlalchemy.Column("note", sqlalchemy.String),
-        sqlalchemy.Column("envelope_id", UUID)
+        sqlalchemy.Column("envelope_id", UUID(as_uuid=True))
     )
