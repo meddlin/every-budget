@@ -28,8 +28,8 @@ export default function Home() {
   }
 
   const fetchPostData = {
-    id: 1,
-    name: 'asdf'
+    name: 'asdf',
+    budget_id: 'f77fcefd-640a-4265-9ad7-915ac71ff7bc'
   }
   const fetchPost = () => {
     fetch('http://localhost:8000/category/create', {

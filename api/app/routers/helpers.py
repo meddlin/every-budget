@@ -46,13 +46,13 @@ def category_single(id: uuid, db: Session):
         return False
     return category
 
-def category_insert_single(db: Session):
+def category_insert_single(sample_cat, db: Session):
     # print('passed in..')
     # print(category)
 
     print('reached category_insert_single')
 
-    cat = Category(id = uuid.uuid4(), date_created = datetime.datetime.now(), name = 'Jan', budget_id = uuid.uuid4())
+    cat = Category(id = uuid.uuid4(), date_created = datetime.datetime.now(), name = sample_cat.name, budget_id = sample_cat.budget_id)
     # hardcode_category = Category(date_created = datetime.datetime.now(), name = 'Jan')
     db.add(cat)
 
