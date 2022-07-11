@@ -1,6 +1,7 @@
 import datetime
 import uuid
-from sqlalchemy import func, select
+from sqlalchemy import func, select, insert
+import sqlalchemy
 from sqlalchemy.orm import Session
 
 from app.database.models import Budget
@@ -51,8 +52,12 @@ def category_insert_single(db: Session):
 
     print('reached category_insert_single')
 
-    hardcode_category = Category(id = uuid.uuid4(), date_created = datetime.datetime.now(), name = 'Jan', budget_id = uuid.uuid4())
-    db.add(hardcode_category)
+    cat = Category(id = uuid.uuid4(), date_created = datetime.datetime.now(), name = 'Jan', budget_id = uuid.uuid4())
+    # hardcode_category = Category(date_created = datetime.datetime.now(), name = 'Jan')
+    db.add(cat)
+
+    # query = Category.insert().values( id = uuid.uuid4(), date_created = datetime.datetime.now(), name = 'Jan' )
+    # db.execute(query)
     db.commit()
 
 

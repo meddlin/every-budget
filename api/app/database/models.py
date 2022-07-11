@@ -19,10 +19,10 @@ class Category(Base):
     __table__ = Table(
         "category",
         metadata, 
-        sqlalchemy.Column("id", UUID, primary_key=True, default=uuid.uuid4),
+        sqlalchemy.Column("id", UUID(as_uuid=True), primary_key=True, default=uuid.uuid4),
         sqlalchemy.Column("date_created", sqlalchemy.DateTime),
         sqlalchemy.Column("name", sqlalchemy.String),
-        sqlalchemy.Column("budget_id", UUID)
+        sqlalchemy.Column("budget_id", UUID(as_uuid=True))
     )
 
 class Envelope(Base):
