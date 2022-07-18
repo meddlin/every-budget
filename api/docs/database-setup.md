@@ -14,6 +14,8 @@
         - user: `postgres`
         - password: `postgres`
 
+Reference for M1 MacOS: [https://medium.com/signofactory/setting-up-your-mac-as-a-full-stack-web-developer-intel-apple-silicon-in-2021-the-backend-9fcc54e858e3](https://medium.com/signofactory/setting-up-your-mac-as-a-full-stack-web-developer-intel-apple-silicon-in-2021-the-backend-9fcc54e858e3)
+
 ## Windows
 
 - Install it all locally (Postgres & pgAdmin)
@@ -22,3 +24,21 @@
 ## Linux
 
 _See MacOS, and good luck._
+
+## UUID Requirement
+
+Ref: [https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-uuid/](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-uuid/)
+
+Before being able to use UUID in PostgreSQL, run this in your database.
+
+_Install the extension_
+
+```sql
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+```
+
+_Check you can generate UUIDs_
+
+```sql
+select uuid_generate_v4();
+```
