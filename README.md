@@ -28,3 +28,10 @@ will say "Paypal..." instead of "Starbucks".
 >   - Paypal history says: "Apple Services"
 >   - Apple payment history gives the actual detail of what was paid
 _*So!*_ this left with me with each time I sat down to 
+
+
+## Getting Started
+
+- Start the API
+    - From within the `/api` directory
+    - Run: `uvicorn app.main:app --reload`
