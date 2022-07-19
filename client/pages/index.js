@@ -1,30 +1,22 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css'
 import { Tab } from '@headlessui/react'
 
 import Category from '../components/category'
 
 export default function Home() {
+  const [budgets, setBudgets] = useState([]);
   const [categories, setCategories] = useState([]);
 
   const newFetch = () => {
-    fetch('http://127.0.0.1:8000/budget/2b1a388e-bdeb-4baf-866b-4999b93600e2')
+    fetch('http://127.0.0.1:8000/budget/170d68d3-5ce0-4083-bc0a-2c55b545f85d')
       .then(response => response.json())
       .then(data => console.log(data))
       .catch(error => {
         console.log('Looks like there was a problem: ', error);
       })
-
-    // fetch('http://127.0.0.1:8000/budget/2b1a388e-bdeb-4baf-866b-4999b93600e2')
-    //   .then(function(response) {
-    //     if (!response.ok) throw new Error(`Error: ${response.status}`);
-    //     console.log(response);
-    //   })
-    //   .catch(function(error) {
-    //     console.log('Looks like there was a problem: ', error);
-    //   });
   }
 
   const fetchPostData = {
@@ -32,8 +24,8 @@ export default function Home() {
     budget_id: 'f77fcefd-640a-4265-9ad7-915ac71ff7bc'
   }
   const fetchPost = () => {
-    fetch('http://localhost:8000/category/create', {
-      method: "POST",
+    fetch('http://localhost:8000/budget/create', {
+      method: "PUT",
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -44,14 +36,54 @@ export default function Home() {
     .then(data => console.log(data))
   }
 
+  const updateBudgetName = () => {
+    fetch('http://localhost:8000/budget/update', {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        id: '170d68d3-5ce0-4083-bc0a-2c55b545f85d',
+        name: 'Update from patch'
+      })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+  }
+
+  const deleteBudget = () => {
+    fetch('http://localhost:8000/budget/delete/cb57f494-56be-4898-8d30-9c830a8a81e3', {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+  }
+
   const addCategory = () => {
-    console.log('add category');
+    console.log('add budget');
     let testCat = {
-      title: 'Test Category',
+      title: 'Test Budget',
       amount: ''
     }
     setCategories(categories => [...categories, testCat])
   }
+
+  useEffect(() => {
+    fetch('http://localhost:8000/budget/get_all', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+    })
+    .then(response => response.json())
+    .then(data => setBudgets(data))
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -74,6 +106,28 @@ export default function Home() {
             onClick={fetchPost}>
             Test - POST
           </button>
+
+          <input placeholder={"enter here..."}></input>
+          <button className="border-2 border-rose-500"
+            onClick={updateBudgetName}>Update</button>
+
+          <label>Delete</label>
+          <button className="border-2 border-rose-500"
+            onClick={deleteBudget}>Delete</button>
+        </div>
+
+        <div>
+          <ul>
+            {(budgets && budgets.length > 0) ? budgets.map(b => {
+              return (
+                <li id={b.id}>
+                  <div>{b.id}</div>
+                  <div>{b.date_created}</div>
+                  <div>{b.name}</div>
+                </li>
+              )
+            }) : ''}
+          </ul>
         </div>
         
         <Tab.Group defaultIndex={0}>

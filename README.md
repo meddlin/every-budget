@@ -33,5 +33,7 @@ _*So!*_ this left with me with each time I sat down to
 ## Getting Started
 
 - Start the API
+    - cd `every-budget`
+    - activate python environment: `source env/bin/activate`
     - From within the `/api` directory
     - Run: `uvicorn app.main:app --reload`
