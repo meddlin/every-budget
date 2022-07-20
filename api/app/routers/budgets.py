@@ -13,10 +13,6 @@ from datetime import date
 
 router = APIRouter()
 
-@router.get("/budget")
-def test_budget():
-    return "test"
-
 ###
 # Retrieve data for a single Budget object
 @router.get("/budget/{id}", response_model=Budget)
