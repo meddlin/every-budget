@@ -5,11 +5,13 @@ from datetime import datetime
 from datetime import date
 
 
-class Envelope(BaseModel):
+class Category(BaseModel):
     id: uuid.UUID
     date_created: datetime
     name: str
+    budget_id: uuid.UUID
 
-
-class Transaction(BaseModel):
+class PartialCategory(BaseModel):
     id: uuid.UUID
+    date_created: Optional[datetime] = None
+    name: Optional[str] = None
