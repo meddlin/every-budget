@@ -5,7 +5,7 @@ from fastapi import APIRouter
 from app.schemas.schemas import Category
 
 from app.schemas import schemas
-from app.routers.helpers import category_single, category_insert_single
+from app.routers.helpers.categories_ops import category_single, category_insert_single
 from app.database.database import get_db
 
 from datetime import date
