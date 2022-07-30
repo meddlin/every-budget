@@ -64,6 +64,19 @@ export default function Home() {
     .then(data => console.log(data))
   }
 
+
+  const budgetDetail = () => {
+    fetch('http://localhost:8000/budget/full-detail/71c9fe7b-8bc6-48fd-8b86-d082feb1e85d', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+  }
+
+
   const addCategory = () => {
     console.log('add budget');
     let testCat = {
@@ -115,6 +128,9 @@ export default function Home() {
             <label>Delete</label>
             <button className="border-2 border-rose-500"
               onClick={deleteBudget}>Delete</button>
+          </div>
+          <div>
+            <button onClick={budgetDetail}>Budget Detail</button>
           </div>
           <ul>
             {(budgets && budgets.length > 0) ? budgets.map(b => {

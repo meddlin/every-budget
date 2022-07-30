@@ -3,9 +3,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 user = "postgres"
-password = "postgres"
+password = "jailbreak"
 host = "localhost"
-port = "5432"
+port = "5434"
 database = "everybudget_db"
 
 engine = create_engine(

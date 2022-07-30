@@ -15,3 +15,4 @@ class PartialCategory(BaseModel):
     id: uuid.UUID
     date_created: Optional[datetime] = None
     name: Optional[str] = None
+    budget_id: Optional[uuid.UUID] = None

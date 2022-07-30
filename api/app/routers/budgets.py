@@ -5,8 +5,9 @@ from sqlalchemy.orm import Session
 
 from fastapi import Depends
 from fastapi import APIRouter
+from app.schemas.budget import BudgetDetail
 from app.schemas.budget import Budget, PartialBudget
-from app.routers.helpers.budget_ops import budget_single, budget_create, budget_update, budget_delete, budget_get_all
+from app.routers.helpers.budget_ops import budget_single, budget_create, budget_update, budget_delete, budget_get_all, budget_full_detail
 from app.database.database import get_db
 
 from datetime import date
@@ -19,6 +20,14 @@ router = APIRouter()
 def get_budget(id, db: Session = Depends(get_db)):
     return budget_single(id, db)
 
+
+@router.get("/budget/full-detail/{id}", response_model = Budget)
+def get_budget_detail(id, db: Session = Depends(get_db)):
+    """ data = budget_full_detail(id, db)
+    print('budget router')
+    print(data)
+    return Budget.from_orm(data) """
+    return budget_full_detail(id, db)
 
 @router.post("/budget/get_all", response_model = List[Budget])
 def get_all_budgets(db: Session = Depends(get_db)):

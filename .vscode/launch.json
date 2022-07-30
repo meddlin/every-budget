@@ -5,17 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Flask",
+            "name": "Python: FastAPI",
             "type": "python",
             "request": "launch",
-            "module": "flask",
-            "env": {
-                "FLASK_APP": "api\\wsgi.py",
-                "FLASK_ENV": "development"
-            },
+            "module": "uvicorn",
+            "cwd": "${workspaceFolder}\\api",
             "args": [
-                "run",
-                "--no-debugger"
+                "app.main:app",
+                "--reload",
+                "--port",
+                "8000"
             ],
             "jinja": true,
             "justMyCode": true
